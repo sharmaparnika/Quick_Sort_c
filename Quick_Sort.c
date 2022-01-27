@@ -1,48 +1,54 @@
-#include<stdio.h>
-void quicksort(int number[25],int first,int last){
-   int i, j, pivot, temp;
+#include <stdio.h>  
 
-   if(first<last){
-      pivot=first;
-      i=first;
-      j=last;
+int partition (int a[], int start, int end)  
+{  
+    int pivot = a[end]; // pivot element  
+    int i = (start - 1);  
+  
+    for (int j = start; j <= end - 1; j++)  
+    {  
+        // If current element is smaller than the pivot  
+        if (a[j] < pivot)  
+        {  
+            i++; // increment index of smaller element  
+            int t = a[i];  
+            a[i] = a[j];  
+            a[j] = t;  
+        }  
+    }  
+    int t = a[i+1];  
+    a[i+1] = a[end];  
+    a[end] = t;  
+    return (i + 1);  
+}  
+  
 
-      while(i<j){
-         while(number[i]<=number[pivot]&&i<last)
-            i++;
-         while(number[j]>number[pivot])
-            j--;
-         if(i<j){
-            temp=number[i];
-            number[i]=number[j];
-            number[j]=temp;
-         }
-      }
-
-      temp=number[pivot];
-      number[pivot]=number[j];
-      number[j]=temp;
-      quicksort(number,first,j-1);
-      quicksort(number,j+1,last);
-
-   }
-}
-
-int main(){
-   int i, count, number[25];
-
-   printf("How many elements are u going to enter?: ");
-   scanf("%d",&count);
-
-   printf("Enter %d elements: ", count);
-   for(i=0;i<count;i++)
-      scanf("%d",&number[i]);
-
-   quicksort(number,0,count-1);
-
-   printf("Order of Sorted elements: ");
-   for(i=0;i<count;i++)
-      printf(" %d",number[i]);
-
-   return 0;
-}
+void quick(int a[], int start, int end) /* a[] = array to be sorted, start = Starting index, end = Ending index */  
+{  
+    if (start < end)  
+    {  
+        int p = partition(a, start, end); //p is the partitioning index  
+        quick(a, start, p - 1);  
+        quick(a, p + 1, end);  
+    }  
+}  
+  
+  
+void printArr(int a[], int n)  
+{  
+    int i;  
+    for (i = 0; i < n; i++)  
+        printf("%d ", a[i]);  
+}  
+int main()  
+{  
+    int a[] = { 24, 9, 29, 14, 19, 27 };  
+    int n = sizeof(a) / sizeof(a[0]);  
+    printf("Before sorting array elements are - \n");  
+    printArr(a, n);  
+    quick(a, 0, n - 1);  
+    printf("\nAfter sorting array elements are - \n");    
+    printArr(a, n);  
+      
+    return 0;  
+}  

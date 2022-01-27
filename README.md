@@ -22,6 +22,17 @@ The steps are:
     6 }   
     } 
     
+ 
+ 
+  *   **Step 1** − Make the right-most index value pivot
+ 
+  *   **Step 2** − Partition the array using pivot value
+  
+  *   **Step 3** − Quicksort left partition recursively
+  
+  *   **Step 4** − Quicksort right partition recursively
+  
+
 ### Quick-Sort Complexity
 
 Now, let's see the time complexity of quicksort in best case, average case, and in worst case. We will also see the space complexity of quicksort.
